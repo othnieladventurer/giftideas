@@ -1,0 +1,397 @@
+{% extends 'evergiftful/base.html' %}
+
+
+{% load static%}
+
+
+
+
+{% block content %}
+<style>
+
+  .banner-item img {
+  filter: brightness(70%);
+}
+</style>
+
+
+<!-- Banner Starts Here -->
+<div class="banner header-text">
+  
+    <div >
+      <img src="https://images.pexels.com/photos/918327/pexels-photo-918327.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" style="width: 100%; height: 100vh; object-fit: cover; " alt="Slide 01">
+      <div class="text-content">
+        <p class="font-weight-bold" style="color:  #f33f3f; font-size: 25px !important;">Handpicked Gift Ideas</p>
+        <h1 style="color: white; font-size: 50px !important;">Valentine's day is at your door</h1>
+      </div>
+    </div>
+  
+</div>
+<!-- Banner Ends Here -->
+
+
+<!--DIsclaimer -->
+<div class="call-to-action ">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 ">
+        <div class="inner-content bg-dark">
+          <div class="row  ">
+            <div class="col-md-12">
+              <h2 style="color: #f33f3f;">Dis<em>clai</em>mer</h2>
+              <p style="color: #ffffff;">Some of the links on this website are affiliate links. This means that if you click on the link and make a purchase, I may receive a small commission at no extra cost to you. </p>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--End of disclaimer-->
+
+
+
+
+
+
+
+<div class="best-features ">
+  <div class="container">
+    <div class="row p-3" style="background-color: white;">
+      <div class="col-md-12">
+        <div class="section-heading">
+          <h2>About SparkEssenceGifts</h2>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="left-content">
+          <h4>Looking for the best gift ideas?</h4>
+          
+          <ul class="featured-list">
+            <li>SparkEssenceGifts is your magical portal to the world of imaginative and thoughtful presents!
+              Discover the best gift ideas for your mother, grandmother, sibling, boyfriend, girlfriend, 
+              husband, and more.</li>
+            <li>Our assortment is a captivating blend of uniqueness and allure,
+                presenting personalized marvels and thoughtfully selected surprises that elevate any occasion into a
+                cherished memory.
+                  The collection is meticulously curated,
+                  bringing you exceptional and popular gift ideas from various categories,
+                    guaranteeing a touch of individuality to every present.</li>
+
+                <li>SparkEssenceGifts brings a fun spirit to the art of gifting, guaranteeing joy,
+                laughter, and endless surprises. Join us in celebrating moments, 
+                because at SparkEssenceGifts, each present is an adventure ready to unfold! 🎁✨</li>
+
+          </ul>
+          
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="right-image">
+          <img src="https://images.pexels.com/photos/1666069/pexels-photo-1666069.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="About picture">
+        </div>
+      </div>
+    </div>
+   
+  </div>
+</div><br>
+
+
+
+
+
+
+<!--BLog Post--> 
+<div class="latest-products ">
+  <div class="container">
+    <div class="row bg-light p-3">
+      <div class="col-md-12">
+        <div class="section-heading">
+          <h2>Latest Blog Posts</h2>
+          <a href="">view all posts <i class="fa fa-angle-right"></i></a>
+        </div>
+      </div>
+
+      {% for article in blogs %}
+      <div class="col-md-4">
+        <div class="product-item  bg-white">
+          <img src="{{ article.image.url }}" style="width: 100%; height: 270px; object-fit: cover;"  alt="{{article.image_alt}}">
+          <div class="down-content">
+            <a href="{{ article.get_absolute_url }}"><h2 style="font-size: 18px; color: black;">{{article.title}}</h2></a><br>
+
+            <ul class="stars mt-2">
+              
+              <li>
+                <span class="ml-3 ">
+                    <button class="btn btn-sm" style="background-color: #f33f3f; color: white;">
+                        <a class="btn btn-sm" href="{{ article.get_absolute_url }}" style="color: white; text-decoration: none;">Read More</a>
+                    </button>
+                </span>
+              </li>
+            
+            </ul>  
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+<br>
+
+
+<!--Men Gift ideas-->
+<div class="latest-products">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="section-heading">
+          <h2>Men Gift Ideas</h2>
+
+          {% for category in categories|slice:'1' %}
+          <a href="{% url 'evergiftful:products_by_category' category_slug='men' %}">View all men's gifts <i class="fa fa-angle-right"></i></a>
+          {% endfor %}
+        </div>
+      </div>
+
+
+      <div class="owl-carousel owl-theme">
+       
+        {% for product in men_products %}
+        <div class="item">
+      
+          <div class="col">
+          
+              
+            <div class="product-item" style="background-color: white;">
+              
+              <a href="{{ product.get_absolute_url }}">
+                <img src="{{ product.image.url }}" style="width: 100%; height: 270px; object-fit: contain;"  alt="{{product.image_alt}}">
+              </a>
+              <div class="down-content">
+                <a href="{{ product.get_absolute_url }}">
+                  <h2 style="font-size: 18px; color: black;">{{ product.title }}</h2>
+                </a><br>
+
+                <ul class="stars">
+  
+                  <li>
+                   
+                    <span class="ml-3">
+                      <button class="btn btn-sm" style="background-color: #f33f3f; color: white;">
+                        <a href="{{ product.get_absolute_url }}" style="color: white; text-decoration: none;">View More</a>
+                      </button>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+              
+          
+          </div>
+        </div>
+        {% endfor %}
+        
+      </div>
+    </div>
+    <hr>
+  </div>
+  
+</div>
+<!-- End men gift ideas-->
+
+
+
+
+
+<!--Women Gift ideas-->
+<div class="latest-products">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="section-heading">
+          <h2>Woman Gift Ideas</h2>
+          {% for category in categories|slice:'1' %}
+          <a href="{% url 'evergiftful:products_by_category' category_slug='women' %}">View all women's gifts <i class="fa fa-angle-right"></i></a>
+          {% endfor %}
+        </div>
+      </div>
+
+
+      <div class="owl-carousel owl-theme">
+       
+        {% for product in women_products %}
+        <div class="item">
+      
+          <div class="col">
+          
+              
+            <div class="product-item" style="background-color: white;">
+              
+              <a href="{{ product.get_absolute_url }}">
+                <img src="{{ product.image.url }}" style="width: 100%; height: 270px; object-fit: contain;"  alt="{{product.image_alt}}">
+              </a>
+              <div class="down-content">
+                <a href="{{ product.get_absolute_url }}">
+                  <h2 style="font-size: 18px; color: black;">{{ product.title }}</h2>
+                </a><br>
+
+                <ul class="stars">
+                  
+                  <li>
+                    
+                    <span class="ml-3">
+                      <button class="btn btn-sm" style="background-color: #f33f3f; color: white;">
+                        <a href="{{ product.get_absolute_url }}" style="color: white; text-decoration: none;">View More</a>
+                      </button>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+              
+          
+          </div>
+        </div>
+        {% endfor %}
+        
+      </div>
+    </div>
+    <hr>
+  </div>
+ 
+</div>
+
+
+
+
+
+<!--Kids Gift ideas-->
+<div class="latest-products">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="section-heading">
+          <h2>Kids Gift Ideas</h2>
+          {% for category in categories|slice:'1' %}
+          <a href="{% url 'evergiftful:products_by_category' category_slug='kids' %}">View all kids's gifts <i class="fa fa-angle-right"></i></a>
+          {% endfor %}
+        </div>
+      </div>
+
+
+      <div class="owl-carousel owl-theme">
+       
+        {% for product in kids_products %}
+        <div class="item">
+      
+          <div class="col">
+          
+              
+            <div class="product-item" style="background-color: white;">
+              
+              <a href="{{ product.get_absolute_url }}">
+                <img src="{{ product.image.url }}" style="width: 100%; height: 270px; object-fit: contain;"  alt="{{product.image_alt}}">
+              </a>
+              <div class="down-content">
+                <a href="{{ product.get_absolute_url }}">
+                  <h2 style="font-size: 18px; color: black;">{{ product.title }}</h2>
+                </a><br>
+
+                <ul class="stars">
+                 
+                  <li>
+                  
+                    <span class="ml-3">
+                      <button class="btn btn-sm" style="background-color: #f33f3f; color: white;">
+                        <a href="{{ product.get_absolute_url }}" style="color: white; text-decoration: none;">View More</a>
+                      </button>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+              
+          
+          </div>
+        </div>
+        {% endfor %}
+        
+      </div>
+    </div>
+    <hr>
+  </div>
+ 
+</div>
+
+
+
+
+
+
+
+
+
+<div class="call-to-action mb-5" style="background-color: #ff6565;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="inner-content" style="background-color: white;">
+          <div class="row" >
+            <div class="col-md-8">
+              <h2 style="color: #f33f3f;">Valentine's <em>day</em> is <em>here</em></h2>
+              <p>Browse our best handpicked giftideas for your love ones</p>
+            </div>
+            <div class="col-md-4">
+              <a href="https://www.amazon.com/shop/iracecaraccessories/list/24H1XHTABG7QF?ref_=cm_sw_r_cp_ud_aipsflist_aipsfiracecaraccessories_AJSEKXG75YQ1HSK164GH" class="filled-button">Storefront</a>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><br>
+
+
+
+
+
+
+
+
+
+<!--Jquery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!--Owl carousel -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+
+
+
+<script>
+    $('.owl-carousel').owlCarousel({
+    
+    loop:true,
+    margin:10,
+    nav:false,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:3
+        },
+        1000:{
+            items:3
+        }
+    }
+})
+</script>
+
+
+{% endblock content %}
+

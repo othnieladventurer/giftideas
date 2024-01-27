@@ -1,0 +1,100 @@
+{% extends 'evergiftful/base.html' %}
+
+
+{% load static%}
+
+
+
+
+{% block content %}
+<style>
+
+  .banner-item img {
+  filter: brightness(70%);
+}
+</style>
+
+
+<!-- Banner Starts Here -->
+<div class="banner header-text">
+  <div class="owl-banner owl-carousel">
+    <div >
+      <img src="https://images.pexels.com/photos/1303087/pexels-photo-1303087.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" style="width: 100%; height: 300px; object-fit: cover; " alt="Slide 01">
+      <div class="text-content">
+        <p class="font-weight-bold" style="color:  #f33f3f; font-size: 25px !important;">Gift ideas</p>
+        <h1 style="color: white; font-size: 70px !important;">Latest Gift Ideas</h1>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Banner Ends Here -->
+
+
+
+    
+<div class="products">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="filters">
+          <ul>
+              <li class="active" data-filter=""><a href="{% url 'evergiftful:gifts' %}" style="color: #f33f3f;">All Products</a></li>
+              {% for category in categories %}
+              <li class="active" data-filter=""><a href="{% url 'evergiftful:products_by_category' category_slug=category.slug %}" style="color: #f33f3f;">{{ category.name }}</a></li>
+              {% endfor %}
+
+
+          </ul>
+        </div>
+      </div>
+
+
+      {% for product in products %}
+      <div class="col-md-4">
+        <div class="product-item">
+          <a href="{{ product.get_absolute_url }}">
+            <img src="{{ product.image.url }}" style="width: 100%; height: 270px; object-fit: contain;"  alt="{{product.image_alt}}">
+          </a>
+          <div class="down-content">
+            <a href="{{ product.get_absolute_url }}">
+              <h2 style="font-size: 18px; color: black;">{{ product.title }}</h2>
+            </a><br>
+
+            <ul class="stars">
+            
+              <li>
+                
+                <span class="ml-3">
+                  <button class="btn btn-sm" style="background-color: #f33f3f; color: white;">
+                    <a href="{{ product.get_absolute_url }}" style="color: white; text-decoration: none;">View More</a>
+                  </button>
+                </span>
+              </li>
+            </ul>
+
+           
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
+
+      <!-- Pagination-->
+      {% if pagination %}
+      <div class="col-md-12">
+        <ul class="pages">
+          <li><a href="#">1</a></li>
+          <li class="active"><a href="#">2</a></li>
+          <li><a href="#">3</a></li>
+          <li><a href="#">4</a></li>
+          <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
+        </ul>
+      </div>
+      {% endif %}
+      <!--Endof pagination -->
+
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

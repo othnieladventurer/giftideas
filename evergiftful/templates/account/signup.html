@@ -1,0 +1,26 @@
+{% extends "evergiftful/base.html" %}
+
+{% load static%}
+
+{% block content %}
+<br><br><br>
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="text-center mb-4">Create An Account</h2>
+
+            <form method="POST">
+                {% csrf_token %}
+                {{ form }}
+ 
+                <button type="submit" class="btn  btn-block btn-lg" style="background-color:  #f33f3f; color: white;">Sign Up</button>
+
+                <hr>
+
+                <p class="text-center" style="font-size: 20px;">Already have an account? <a href="{% url 'evergiftful:login' %}">Sign In</a></p>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

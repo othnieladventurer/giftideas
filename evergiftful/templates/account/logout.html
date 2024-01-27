@@ -1,0 +1,44 @@
+{% extends "evergiftful/base.html" %}
+
+{% load allauth i18n %}
+
+{% block head_title %}
+    {% trans "Sign Out" %}
+{% endblock head_title %}
+
+{% block content %}
+<style>
+    .sign-out-button {
+        /* Your custom styles here */
+        background-color: #dc3545; /* Red background color */
+        color: #fff; /* White text color */
+        /* Add any additional styles as needed */
+    }
+</style>
+
+
+<br><br><br>
+<div class="container mt-5 mb-5">
+    {% element h1 %}
+        {% trans "Sign Out" %}
+    {% endelement %}
+    <p>{% trans 'Are you sure you want to sign out?' %}</p>
+    {% url 'account_logout' as action_url %}
+    {% element form method="post" action=action_url no_visible_fields=True %}
+        {% slot body %}
+            {% csrf_token %}
+            {% if redirect_field_value %}
+                <input type="hidden"
+                       name="{{ redirect_field_name }}"
+                       value="{{ redirect_field_value }}" />
+            {% endif %}
+        {% endslot %}
+
+        {% slot actions %}
+            {% element button type="submit" class="sign-out-button" %}
+                    {% trans 'Sign Out' %}
+            {% endelement %}
+        {% endslot %}
+    {% endelement %}
+</div>
+{% endblock content %}

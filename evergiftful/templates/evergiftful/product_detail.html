@@ -1,0 +1,230 @@
+{% extends 'evergiftful/base.html' %}
+
+
+{% load static%}
+
+
+
+
+{% block content %}
+<style>
+    .product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    
+    object-position: bottom center !important;
+}
+</style>
+
+
+<style>
+  #addToWishlistBtn:hover {
+    background-color: #f8f9fa; /* Your desired light color on hover */
+  }
+</style>
+
+<br><br><br>
+<!-- Product Detail Section -->
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-6 product-images">
+            <!-- Larger product image and smaller thumbnails -->
+          <div class="row  d-none d-sm-flex">
+            <div class="col-12 mb-5">
+                <img src="{{product.image.url }}" class="img-fluid" style="width: 100%; height: 500px; object-fit: contain;" alt="Product Image 1">
+            </div>
+            {% for image in related_images %}
+            <div class="col-md-6 mt-3">
+              <img src="{{ image.image.url }}" class="img-fluid product-image" alt="{{product.image_alt }}" style="width: 100%; object-fit: contain;">
+
+            </div>
+            {% endfor %}    
+          </div>
+
+          
+          <div class="row d-md-none d-block">
+            <div class="owl-carousel owl-theme">
+                {% for image in related_images %}
+                <div class="item">
+                  <div class="col mt-3">
+                    <img src="{{ image.image.url }}" class="img-fluid product-image" alt="{{product.image_alt }}" style="object-fit: cover;">
+
+                  </div>
+                </div>
+                {% endfor %} 
+              </div>
+            </div>   
+          </div>
+      
+
+        <div class="col-lg-6">
+            <h2 class="mb-4 mt-3">{{ product.title }}</h2>
+
+
+
+            {% if user_authenticated %}
+            <button class="btn btn-outline-secondary btn-block mt-4 px-3 py-3 text-dark font-weight-bold" id="addToWishlistBtn" data-product-id="{{ product.id }}" {% if product_in_wishlist %}disabled{% endif %}>
+                <i class="fa fa-heart" style="color: #f33f3f;"></i> {% if product_in_wishlist %}Added To Wishlist{% else %}Add to Wishlist{% endif %}
+            </button>
+            <a href="{% url 'evergiftful:wishlist' %}" class="float-right" style="font-size: 18px;">Go to wishlist now -></a><br>
+        {% else %}
+            <button class="btn btn-outline-secondary btn-block mt-4 px-3 py-3 text-dark font-weight-bold" id="addToWishlistBtn" data-product-id="{{ product.id }}">
+                <i class="fa fa-heart" style="color: #f33f3f;"></i> Add to Wishlist
+            </button>
+        
+            
+            {% endif %}
+
+          
+
+         
+
+            <button class="btn btn-block mt-4 px-3 py-3" style="background-color: #f33f3f;"><a class="text-white font-weight-bold" href="{{ product.url }}">Buy On Amazon</a></button>
+
+            
+            
+
+            <p class="mt-5">{{product.description|safe|linebreaks}}</p>
+        </div>
+    </div><br>
+    <hr>
+</div>
+
+
+
+<!--Gift ideas-->
+{% if related_products %}
+<div class="latest-products">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="section-heading">
+            <h2>Gifts you may also like</h2>
+          </div>
+        </div>
+  
+        {% for product in related_products %}
+        <div class="col-md-4">
+          <div class="product-item">
+            <a href="{{ product.get_absolute_url }}">
+              <img src="{{ product.image.url }}" style="width: 100%; height: 270px; object-fit: contain;"  alt="{{product.image_alt}}">
+            </a>
+            <div class="down-content">
+              <a href="{{ product.get_absolute_url }}">
+                <h2 style="font-size: 18px; color: black;">{{ product.title }}</h2>
+              </a><br>
+  
+              <ul class="stars">
+                
+                <li>
+                 
+                  <span class="ml-3">
+                    <button class="btn btn-sm" style="background-color: #f33f3f; color: white;">
+                      <a href="{{ product.get_absolute_url }}" style="color: white; text-decoration: none;">View More</a>
+                    </button>
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+</div>
+{% endif %}
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
+
+<script>
+  $(document).ready(function () {
+      // Store the current page URL in session storage
+      sessionStorage.setItem('returnUrl', window.location.href);
+
+      $('#addToWishlistBtn').click(function () {
+          var button = $(this);
+          var productId = button.data('product-id');
+
+          $.ajax({
+              type: 'POST',
+              url: '{% url "evergiftful:product_detail" slug=product.slug %}',
+              data: {
+                  csrfmiddlewaretoken: '{{ csrf_token }}',
+                  product_id: productId,
+              },
+              success: function (data) {
+                  // Update button text and disable it after successful addition
+                  button.html('<i class="fa fa-heart" style="color: #f33f3f;"></i> Added to Wishlist').prop('disabled', true);
+              },
+              error: function () {
+                  // Redirect to the login page on "OK" click
+                  if (confirm('You must be signed in first. Do you want to go to the login page?')) {
+                      // Redirect to the login page
+                      window.location.href = '{% url "evergiftful:login" %}';
+                  }
+              }
+          });
+      });
+
+      // On successful login, submit the form to add the product to the wishlist
+      $('#loginForm').submit(function () {
+          // Retrieve the stored URL and redirect the user back
+          var returnUrl = sessionStorage.getItem('returnUrl');
+          if (returnUrl) {
+              window.location.href = returnUrl;
+          }
+
+          // Save the product ID to add to the wishlist after login
+          sessionStorage.setItem('productToAdd', '{{ product.id }}');
+      });
+
+      // Check for alert message in sessionStorage and display it
+      var alertMessage = sessionStorage.getItem('alertMessage');
+      if (alertMessage) {
+          alert(alertMessage);
+          // Clear sessionStorage after displaying the alert
+          sessionStorage.removeItem('alertMessage');
+      }
+  });
+</script>
+
+
+
+
+
+
+<!--Jquery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!--Owl carousel -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+
+
+
+<script>
+    $('.owl-carousel').owlCarousel({
+    
+    loop:true,
+    margin:10,
+    nav:false,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:3
+        },
+        1000:{
+            items:3
+        }
+    }
+})
+</script>
+
+
+{% endblock content %}

@@ -1,0 +1,83 @@
+{% extends 'evergiftful/base.html' %}
+
+
+{% load static%}
+
+
+
+
+{% block content %}
+
+    <!-- Page Content -->
+    <div class="page-heading contact-heading header-text">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="text-content">
+              <h4>contact us</h4>
+              <h2>let’s get in touch</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    
+    <div class="send-message mb-5">
+      <div class="container ">
+        <div class="row p-2" style="background-color: white;">
+          <div class="col-md-12">
+            <div class="section-heading">
+              <h2>Send us a Message</h2>
+            </div>
+          </div>
+          
+
+
+          <div class="col-md-8" >
+            <div class="contact-form">
+              <form id="contact-form" action="" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="btn btn-danger" type="submit">Send Message</button>
+
+              </form>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <ul class="accordion">
+              <li>
+                  <a>Contact us</a>
+                  <div class="content">
+                      <p>
+                        Feel free to contact us for your inquiries and suggestion. We will be very happy to assist you!
+                      </p>
+                  </div>
+              </li>
+
+
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+<!-- Include SweetAlert2 CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
+
+<!-- Include SweetAlert2 JS -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+<script>
+
+</script>
+
+
+
+
+
+{% endblock content %}

@@ -1,0 +1,128 @@
+<!-- Header -->
+{% load static %}
+<style>
+    .navbar-brand h2 {
+        margin-bottom: 0;
+    }
+
+    .navbar-brand h2 {
+        margin-bottom: 0;
+        font-size: 18px !important; /* Adjust the font size in pixels as needed */
+    }
+
+    /* Media query for small screens */
+    @media (max-width: 768px) {
+        .navbar-brand h2 {
+            font-size: 16px !important; /* Adjust the font size for small screens in pixels */
+        }
+    }
+
+</style>
+
+<header class="">
+      <nav class="navbar navbar-expand-lg">
+          <div class="container d-flex align-items-center">
+              <a class="navbar-brand" href="{% url 'evergiftful:home' %}">
+                  <h2 class="mb-0">Spark<em>Essence</em><span style="color: #aaaaaa;">Gifts</span></h2>
+              </a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarResponsive">
+                  <ul class="navbar-nav ml-auto align-items-center">
+                      <!-- Navigation items -->
+                      <li class="nav-item">
+                          <a class="nav-link" href="{% url 'evergiftful:home' %}">Home
+                              <span class="sr-only">(current)</span>
+                          </a>
+                      </li> 
+                      <li class="nav-item">
+                          <a class="nav-link" href="{% url 'evergiftful:gifts' %}">Gifts</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="{% url 'evergiftful:blog' %}">Blogs</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="{% url 'evergiftful:about' %}">About</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="{% url 'evergiftful:contact' %}">Contact</a>
+                      </li>
+  
+                      <li class="nav-item ml-2">
+                          <div class="btn-group">
+                            {% if user.is_authenticated %}
+                            <button type="button" class="btn btn-danger">{{ user.username }}</button>
+                            <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+
+                            {% else %}
+                            <button type="button" class="btn btn-danger"><a href="{% url 'evergiftful:login' %}" style="color: white; text-decoration: none;">Sign in</a></button>
+                            <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            {% endif %}
+
+
+                            {% if user.is_authenticated %}
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Profile</a>
+
+                                <div class="dropdown-divider"></div>
+                                <form id="logoutForm" method="post" action="{% url 'evergiftful:logout' %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="next" value="{{ request.path }}">
+                                    <a class="dropdown-item" href="#" onclick="document.getElementById('logoutForm').submit()">Sign Out</a>
+                                </form>
+                            </div>
+                        {% else %}
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="{% url 'evergiftful:login' %}#">Sign In</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{% url 'evergiftful:signup' %}">Create Account</a>
+                            </div>
+                        {% endif %}
+
+                          </div>
+                      </li>
+
+
+                    <li class="nav-item ml-2">
+                          <div class="btn-group">
+                              <button type="button" class="btn btn-outline-secondary wishlist text-white">
+                                  <a class="wishlist" href="{% url 'evergiftful:wishlist' %}"> <i class="fa fa-heart" style="color:#f33f3f!important;"></i>
+                                  Wishlist</a>
+                              </button>
+                          </div>
+                    </li>
+                
+
+                  </ul>
+              </div>
+          </div>
+      </nav>
+</header>
+
+
+
+
+<!-- Your HTML template -->
+<style>
+    .wishlist {
+        background-color: black;
+      color: white;
+      transition: color 0.3s ease-in-out;
+    }
+  
+    .wishlist:hover {
+      background-color: black;
+      color: white;
+    }
+  
+    .wishlist.black-on-scroll {
+      color: black;
+    }
+  </style>
+  
+ 

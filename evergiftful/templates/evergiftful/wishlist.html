@@ -1,0 +1,121 @@
+{% extends 'evergiftful/base.html' %}
+
+
+{% load static%}
+
+
+
+
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-xrX8o8Is8nSJKv9VSY4qH1rJlLTaC5b5fy1/0wOsF+3ccR1P6L4Bd9shI88U6UgR0Z3v3jnkA01WVjKz2iKqew=="
+   crossorigin="anonymous" />
+<br><br><br>
+<div class=" text-center mt-5">
+    <h2>Your Wishlist:</h2>
+</div>
+
+{% if user.is_authenticated %}
+<div class="container mt-3 mb-5 bg-light p-3">
+      
+    <div class="row">
+       
+        <div class="col-md-12">
+            <div class="shopping-cart">
+
+                
+
+                {% if wishlist %}
+                <div class="cart-header d-none d-sm-none d-mb-block d-lg-block mb-3">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Products</h4>
+                        </div>
+                       
+                       
+                        <div class="col-md-2">
+                            <h4>Remove</h4>
+                        </div>
+
+
+                        <div class="col-md-2">
+                            <h4>Buy Now</h4>
+                        </div>
+                    </div>
+                </div><hr>
+                    {% for product in wishlist %}
+                    <div class="cart-item">
+                        <div class="row">
+                            <div class="col-md-6 my-auto">
+                                <a href="{{ product.get_absolute_url }}" style="color: black;">
+                                    <label class="product-name">
+                                        <img src="{{ product.image.url }}" style="width: 50px; height: 50px; object-fit: contain;" alt="">
+                                        {{ product.title|slice:'40'}}...
+                                    </label>
+                                </a>
+                            </div>
+                           
+
+                            <div class="col-md-2 col-5 my-auto">
+                                <form method="post" action="{% url 'evergiftful:wishlist_remove' product.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger btn-sm">
+                                    <i class="fa fa-trash"></i> Remove
+                                    </button>
+                                </form>
+                            </div>
+
+                            <div class="col-md-2 col-5 my-auto">
+                                <div class="remove btn-group ">
+                                    <a href="{{ product.url}}" class="btn btn-warning btn-sm mr-5">
+                                        <i class="fas fa-heart "></i> Buy On amazon
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><hr>
+                   
+                    {% endfor  %}
+
+                    {% else %}
+                    <div class="container mt-5 mb-4 bg-light p-4">
+                        <h3>Your wishlist is empty, Add element to your wishlist and comeback later.</h3>
+                    </div>
+                {% endif %}
+
+                        
+            </div>
+        </div>
+       
+    </div>
+
+</div>
+{% elif user.is_authenticated %}
+<div class="container mt-5 mb-4 bg-light p-4">
+    <h3>Your wishlist is empty, Add element to your wishlist and comeback later.</h3>
+</div>
+
+
+
+
+{% else %}
+<div class="container mt-5 mb-4 bg-light p-4 text-center">
+  
+        <h3>You must be signed in first to access wishlist!</h3><br>
+       
+            <a href="{% url 'evergiftful:login' %}" class="filled-button">Sign in</a>
+        
+    </div>  
+</div>
+{% endif %}
+<br><br><br>
+
+
+
+
+
+
+
+{% endblock %}
+
+
+
