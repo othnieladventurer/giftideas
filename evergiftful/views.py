@@ -11,14 +11,13 @@ from django.contrib import messages
 
 
 from django.http import JsonResponse
-
-from django.http import JsonResponse
-
+from django.views.decorators.cache import cache_page
 
 
 
 
 
+@cache_page(24 * 60 * 60)
 def home(request):
     blogs = BlogPost.objects.all()
     product = Product.objects.all()
