@@ -38,7 +38,7 @@
       <div class="col-md-12">
         <div class="filters">
           <ul>
-              <li class="active" data-filter=""><a href="{% url 'evergiftful:gifts' %}" style="color: #f33f3f;">All PGift ideas</a></li>
+              <li class="active" data-filter=""><a href="{% url 'evergiftful:gifts' %}" style="color: #f33f3f;">All Gift ideas</a></li>
               {% for category in categories %}
               <li class="active" data-filter=""><a href="{% url 'evergiftful:products_by_category' category_slug=category.slug %}" style="color: #f33f3f;">{{ category.name }}</a></li>
               {% endfor %}

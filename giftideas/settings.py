@@ -175,8 +175,12 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'HOST': 'giftideas-db-othnielnixonlafond-76b4.a.aivencloud.com',
+        'PORT': '18262',
+        'NAME': 'defaultdb',
+        'USER': 'avnadmin',
+        'PASSWORD': config('PASSWORD'),
     }
 }
 

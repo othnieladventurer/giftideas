@@ -103,7 +103,7 @@ class Wishlist(models.Model):
 
 class Product(models.Model):
     title = models.CharField(max_length=200)
-    price = models.CharField(max_length=200)
+    price = models.CharField(max_length=200, blank=True)
     discount = models.CharField(max_length=200, blank=True)
     image = models.ImageField(upload_to='media/')
     image_alt = models.CharField(max_length=200)
