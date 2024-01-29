@@ -17,36 +17,44 @@ from django.views.decorators.cache import cache_page
 
 
 
-@cache_page(24 * 60 * 60)
-def home(request):
-    blogs = BlogPost.objects.all()
-    product = Product.objects.all()
-    categories = Category.objects.all()
 
-    #All Men's GIfts
+def home(request):
+    blogs = BlogPost.objects.all()[::-1]  # Reversing the order of blogs
+    product = Product.objects.all()[::-1]  # Reversing the order of products
+    categories = Category.objects.all()[::-1]  # Reversing the order of categories
+
+
+    page_title = 'Sparkessencegifts'
+    meta_description = 'Explore curated gifts for all at our shop—thoughtful surprises for loved ones, stylish accessories for every occasion. Elevate your gift-giving experience!'
+    page_image = 'static/images/slide-1.jpg'
+
+    # All Men's Gifts
     men_category = Category.objects.get(name='Men')
     women_category = Category.objects.get(name='Women')
     kids_category = Category.objects.get(name='Kids')
 
-    men_products = Product.objects.filter(category=men_category)
-    women_products = Product.objects.filter(category=women_category)
-    kids_products = Product.objects.filter(category=kids_category)
-
-
+    men_products = Product.objects.filter(category=men_category)[::-1]  # Reversing the order of men_products
+    women_products = Product.objects.filter(category=women_category)[::-1]  # Reversing the order of women_products
+    kids_products = Product.objects.filter(category=kids_category)[::-1]  # Reversing the order of kids_products
 
     context = {
-        'blogs':blogs,
+        'men_categories': men_category,
+        'women_categories': women_category,
+        'kids_categories': women_category,
+
+        'men_products': men_products,
+        'women_products': women_products,
+        'kids_products': kids_products,
+
+        'blogs': blogs,
+        'page_title': page_title,
+        'meta_description': meta_description,
+        'page_image': page_image,
         'products': product,
         'categories': categories,
-
-        'men_categories':men_category,
-        'women_categories':women_category,
-        'kids_categories':women_category,
-
-        'men_products':men_products,
-        'women_products':women_products,
-        'kids_products':kids_products,
+        
     }
+
     return render(request, 'evergiftful/index.html', context)
 
 
@@ -57,9 +65,18 @@ def gifts(request):
     products = Product.objects.all()
     categories = Category.objects.all()
 
+
+    page_title = 'All Sparkessencegifts'
+    meta_description = 'Check out our carefully curated Gifts page. Uncover unique presents, blending style and thoughtfulness for lasting impressions.'
+    page_image = 'static/images/gifts_page.jpg'
+
+
     context = {
         'products': products,
         'categories': categories,
+        'page_title': page_title,
+        'meta_description': meta_description,
+        'page_image': page_image,
     }
     return render(request, 'evergiftful/gifts.html', context)
 
@@ -102,6 +119,8 @@ class ProductDetail(DetailView):
         # Filter related images for the current product
         related_images = ProductImage.objects.filter(product=product)
 
+
+
         # Get related products for the current product
         related_products = product.related_products.all()
 
@@ -138,10 +157,25 @@ class ProductDetail(DetailView):
 def blogs(request):
     blog = BlogPost.objects.all()
 
+
+    page_title = 'Blog posts Sparkessencegifts'
+    meta_description = 'Explore inspiration on our Blogs page, where trends, heartwarming stories, and expert gift ideas unfold. Let our blogs guide you for memorable celebrations.'
+    page_image = 'static/images/blog_page.jpg'
+
     context = {
         'blogs':blog,
+        'page_title': page_title,
+        'meta_description': meta_description,
+        'page_image': page_image,
     }
     return render(request, 'evergiftful/blogs.html', context)
+
+
+
+
+
+
+
 
 
 
@@ -163,7 +197,17 @@ class BlogDetail(DetailView):
 
 
 def about(request):
-    return render(request, 'evergiftful/about.html')
+    page_title = 'About Sparkessencegifts'
+    meta_description = 'Discover the core of our gift shop on the About page. Invest yourself in our narrative, mission, and devotion to providing excellent gifts.'
+
+    page_image = 'static/images/about_page.webp'
+
+    context = {
+        'page_title': page_title,
+        'meta_description': meta_description,
+        'page_image': page_image,
+    }
+    return render(request, 'evergiftful/about.html', context)
 
 
 
@@ -176,6 +220,11 @@ def about(request):
 
 
 def wishlist(request):
+    page_title = 'Sparkessencegifts Wishlist'
+    meta_description = 'Envision perfect gifts on our Wishlist page. Craft and share your favorite surprises, transforming wishes into cherished moments for every celebration.'
+
+    page_image = 'static/images/about_page.webp'
+    
     if request.user.is_authenticated:
         user_wishlist, created = Wishlist.objects.get_or_create(user=request.user)
         wishlist_products = user_wishlist.products.all()
@@ -184,9 +233,15 @@ def wishlist(request):
 
     context = {
         'wishlist': wishlist_products,
+        'page_title': page_title,
+        'meta_description': meta_description,
+        'page_image': page_image,
     }
 
     return render(request, 'evergiftful/wishlist.html', context)
+
+
+
 
 
 
@@ -238,6 +293,13 @@ def signup(request):
 
 
 def contact(request):
+
+    page_title = 'Contact Sparkessencegifts'
+    meta_description = 'Connect with us on the Contact page. Inquiries, assistance, or personalized recommendations— we are dedicated to ensuring delightful and seamless experiences.'
+
+    page_image = 'static/images/about_page.webp'
+
+
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
@@ -248,4 +310,12 @@ def contact(request):
     else:
         form = ContactForm()
 
-    return render(request, 'evergiftful/contact.html', {'form': form})
+
+    context = {
+        'page_title': page_title,
+        'meta_description': meta_description,
+        'page_image': page_image,
+        'form': form,
+    }
+
+    return render(request, 'evergiftful/contact.html', context)

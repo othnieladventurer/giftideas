@@ -6,6 +6,27 @@
 
 
 
+
+{% block title %} {{ product.title }}  {% endblock %}
+{% block meta_description %}{{ product.description|striptags|truncatechars:156}}...{% endblock %}
+
+
+{% block og_title %} {{ product.title }}{% endblock %}
+{% block og_description %} {{ product.description|striptags|slice:'156'}}...{% endblock %}
+{% block og_image %} {{ product.image.url }} {% endblock %}
+{% block og_url %} {{ request.build_absolute_uri }} {% endblock %}
+{% block og_type %}website{% endblock %}
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@my_own_alpha">
+<meta name="twitter:title" content=" {{ product.title }}">
+<meta name="twitter:description" content="{{ product.description|striptags|truncatechars:156}}">
+<meta name="twitter:image" content="{{ object.image.url }}">
+<meta name="twitter:url" content="{{ request.build_absolute_uri }} ">
+
+
+
 {% block content %}
 <style>
     .product-image {

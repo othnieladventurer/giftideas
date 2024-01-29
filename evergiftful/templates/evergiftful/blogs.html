@@ -6,6 +6,19 @@
 
 
 
+{% block title %}{{ page_title }}{% endblock %}
+{% block meta_description %}{{ meta_description }}{% endblock %}
+
+
+{% block og_title %}{{ page_title }}{% endblock %}
+{% block og_description %}{{ meta_description}}{% endblock %}
+{% block og_image %}{{ page_image }}{% endblock %}
+{% block og_url %}{{ request.build_absolute_uri }}{% endblock %}
+{% block og_type %}website{% endblock %}
+
+
+
+
 {% block content %}
 <style>
 
@@ -19,10 +32,10 @@
 <div class="banner header-text">
   <div class="owl-banner owl-carousel">
     <div >
-      <img src="https://images.pexels.com/photos/1303085/pexels-photo-1303085.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" style="width: 100%; height: 300px; object-fit: cover; " alt="Slide 01">
+      <img src="{% static 'images/blog_page.jpg' %}" style="width: 100%; height: 300px; object-fit: cover;" loading="eager" alt="blog_page">
       <div class="text-content">
         <p class="font-weight-bold" style="color:  #f33f3f; font-size: 25px !important;">Gift ideas</p>
-        <h1 style="color: white; font-size: 70px !important;">Latest Blog Posts</h1>
+        <h1 style="color: white; font-size: 40px !important;">Latest Blog Posts</h1>
       </div>
     </div>
   </div>

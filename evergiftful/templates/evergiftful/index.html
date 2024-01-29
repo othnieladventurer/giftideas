@@ -19,7 +19,7 @@
 <div class="banner header-text">
   
     <div >
-      <img src="https://images.pexels.com/photos/918327/pexels-photo-918327.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" style="width: 100%; height: 100vh; object-fit: cover; " alt="Slide 01">
+      <img src="{% static 'images/slide-1.jpg' %}" style="width: 100%; height: 100vh; object-fit: cover;" loading="eager" alt="Slide-1">
       <div class="text-content">
         <p class="font-weight-bold" style="color:  #f33f3f; font-size: 25px !important;">Handpicked Gift Ideas</p>
         <h1 style="color: white; font-size: 50px !important;">Valentine's day is at your door</h1>
@@ -116,7 +116,7 @@
       {% for article in blogs %}
       <div class="col-md-4">
         <div class="product-item  bg-white">
-          <img src="{{ article.image.url }}" style="width: 100%; height: 270px; object-fit: cover;"  alt="{{article.image_alt}}">
+          <a href="{{ article.get_absolute_url }}"><img src="{{ article.image.url }}" style="width: 100%; height: 270px; object-fit: cover;"  alt="{{article.image_alt}}"></a>
           <div class="down-content">
             <a href="{{ article.get_absolute_url }}"><h2 style="font-size: 18px; color: black;">{{article.title}}</h2></a><br>
 

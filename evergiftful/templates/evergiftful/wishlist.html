@@ -6,6 +6,20 @@
 
 
 
+
+{% block title %}{{ page_title }}{% endblock %}
+{% block meta_description %}{{ meta_description }}{% endblock %}
+
+
+{% block og_title %}{{ page_title }}{% endblock %}
+{% block og_description %}{{ meta_description}}{% endblock %}
+{% block og_image %}{{ page_image }}{% endblock %}
+{% block og_url %}{{ request.build_absolute_uri }}{% endblock %}
+{% block og_type %}website{% endblock %}
+
+
+
+
 {% block content %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-xrX8o8Is8nSJKv9VSY4qH1rJlLTaC5b5fy1/0wOsF+3ccR1P6L4Bd9shI88U6UgR0Z3v3jnkA01WVjKz2iKqew=="
    crossorigin="anonymous" />

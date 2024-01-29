@@ -111,10 +111,20 @@ class Product(models.Model):
     url = models.URLField(max_length=200)
     slug = AutoSlugField(populate_from='title', unique=True)
     related_products = models.ManyToManyField('self', blank=True)
+    date_created = models.DateTimeField(default=timezone.now)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True)
     subcategory = models.ForeignKey(Subcategory, on_delete=models.CASCADE, blank=True, null=True,)
     product_type = models.ForeignKey(ProductType, on_delete=models.CASCADE, blank=True)
     wishlist = models.ManyToManyField(Wishlist, blank=True)
+
+
+
+    
+    class Meta:
+        ordering = ['-date_created']
+
+
+    
 
 
 
