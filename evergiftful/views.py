@@ -17,14 +17,14 @@ from django.views.decorators.cache import cache_page
 
 
 
-
+@cache_page(24 * 60 * 60)
 def home(request):
     blogs = BlogPost.objects.all()[::-1]  # Reversing the order of blogs
     product = Product.objects.all()[::-1]  # Reversing the order of products
     categories = Category.objects.all()[::-1]  # Reversing the order of categories
 
 
-    page_title = 'Sparkessencegifts'
+    page_title = 'Ketowonderverse'
     meta_description = 'Explore curated gifts for all at our shop—thoughtful surprises for loved ones, stylish accessories for every occasion. Elevate your gift-giving experience!'
     page_image = 'static/images/slide-1.jpg'
 
@@ -159,7 +159,7 @@ def blogs(request):
 
 
     page_title = 'Blog posts Sparkessencegifts'
-    meta_description = 'Explore inspiration on our Blogs page, where trends, heartwarming stories, and expert gift ideas unfold. Let our blogs guide you for memorable celebrations.'
+    meta_description = 'Discover a wealth of insights on keto, for weight loss, and low-carb living in our blog. Stay informed, inspired, and motivated on your wellness journey.'
     page_image = 'static/images/blog_page.jpg'
 
     context = {

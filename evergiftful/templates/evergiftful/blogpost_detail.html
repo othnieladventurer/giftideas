@@ -17,12 +17,7 @@
 {% block og_type %}website{% endblock %}
 
 
-<meta name="twitter:card" content="summary">
-<meta name="twitter:site" content="@my_own_alpha">
-<meta name="twitter:title" content=" {{ object.title }}">
-<meta name="twitter:description" content="{{ object.content|striptags|truncatechars:160}}">
-<meta name="twitter:image" content="{{ object.image.url }}">
-<meta name="twitter:url" content="{{ request.build_absolute_uri }} ">
+
 
 
 {% block content %}

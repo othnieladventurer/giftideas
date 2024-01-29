@@ -17,7 +17,7 @@
     {% block og_tags %}
     <meta property="og:title" content="{% block og_title %}Sparkessengifts{% endblock %}">
     <meta property="og:description" content="{% block og_description %}Explore curated gifts for all at our shop—thoughtful surprises for loved ones, stylish accessories for every occasion. Elevate your gift-giving experience!{% endblock %}">
-    <meta property="og:image" content="{% block og_image %}{% static 'images/slide-1.jpg' %}{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}{{ page_image }}{% endblock %}">
     <meta property="og:url" content="{% block og_url %}{{ request.build_absolute_uri }}{% endblock %}">
     <meta property="og:type" content="{% block og_type %}website{% endblock %}">
     <meta property="og:site_name" content="{% block og_site_name %}Sparkessengifts{% endblock %}">
@@ -28,7 +28,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{% if object.title %} {{ object.title }} {% else %} {{ page_title }} {% endif %}">
     <meta name="twitter:description" content="{% if object.title %}{{ object.description | striptags | slice:160 }}{% else %}{{meta_description}}{% endif %}">
-    <meta name="twitter:image" content="{% if object.image_url %}{{ object.image_url }}{% else %}{{ page_image }}{% endif %}">
+    <meta name="twitter:image" content="{% if object.image_url %}{{ object.image.url }}{% endif %}">
     <!-- End of twitter tag-->
     
 
