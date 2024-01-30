@@ -17,7 +17,7 @@ from django.views.decorators.cache import cache_page
 
 
 
-
+@cache_page(60 * 60) 
 def home(request):
     blogs = BlogPost.objects.all()[::-1]  # Reversing the order of blogs
     product = Product.objects.all()[::-1]  # Reversing the order of products
