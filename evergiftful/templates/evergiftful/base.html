@@ -37,12 +37,25 @@
 
 
     <!-- Additional CSS Files -->
-    <link rel="preload" href="{% static 'css/fontawesome.css' %}">
+    <link rel="preload" as="style" href="{% static 'css/fontawesome.css' %}">
+
     <link rel="stylesheet" href="{% static 'css/templatemo-sixteen.css' %}">
 
  
 
-    <link rel="preload" as="image" href="{% static 'images/slide-1.jpg' %}" type="image">
+    <link rel="preload" as="image" href="{% static 'images/slide-1.jpg' %}" type="image/jpeg">
+
+
+    <script>
+      // Dynamically apply the Font Awesome stylesheet after window load
+      window.onload = function() {
+          var styleSheet = document.createElement("link");
+          styleSheet.rel = "stylesheet";
+          styleSheet.href = "{% static 'css/fontawesome.css' %}";
+          document.head.appendChild(styleSheet);
+      };
+  </script>
+
 
 
  
