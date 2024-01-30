@@ -33,11 +33,11 @@
     
 
     <!-- Bootstrap core CSS -->
-    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link  href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
 
 
     <!-- Additional CSS Files -->
-    <link rel="stylesheet" href="{% static 'css/fontawesome.css' %}">
+    <link rel="preload" href="{% static 'css/fontawesome.css' %}">
     <link rel="stylesheet" href="{% static 'css/templatemo-sixteen.css' %}">
 
  
@@ -58,12 +58,12 @@
 
     {% include 'evergiftful/footer.html' %}
     <!-- Bootstrap core JavaScript -->
-    <script async src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-    <script async src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script defer src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script defer src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
 
     <!-- Additional Scripts -->
-    <script async src="{% static 'js/custom.js' %}"></script>
+    <script defer src="{% static 'js/custom.js' %}"></script>
 
 
 
