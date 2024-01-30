@@ -64,95 +64,6 @@
 
 
 
-
-
-
-
-<div class="best-features ">
-  <div class="container">
-    <div class="row p-3" style="background-color: white;">
-      <div class="col-md-12">
-        <div class="section-heading">
-          <h2>About SparkEssenceGifts</h2>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="left-content">
-          <h4>Looking for the best gift ideas?</h4>
-          
-          <ul class="featured-list">
-            <li>SparkEssenceGifts is your magical portal to the world of imaginative and thoughtful presents!
-              Discover the best gift ideas for your mother, grandmother, sibling, boyfriend, girlfriend, 
-              husband, and more.</li>
-            <li>Our assortment is a captivating blend of uniqueness and allure,
-                presenting personalized marvels and thoughtfully selected surprises that elevate any occasion into a
-                cherished memory.
-                  The collection is meticulously curated,
-                  bringing you exceptional and popular gift ideas from various categories,
-                    guaranteeing a touch of individuality to every present.</li>
-
-                <li>SparkEssenceGifts brings a fun spirit to the art of gifting, guaranteeing joy,
-                laughter, and endless surprises. Join us in celebrating moments, 
-                because at SparkEssenceGifts, each present is an adventure ready to unfold! 🎁✨</li>
-
-          </ul>
-          
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="right-image">
-          <img src="https://images.pexels.com/photos/1666069/pexels-photo-1666069.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="About picture">
-        </div>
-      </div>
-    </div>
-   
-  </div>
-</div><br>
-
-
-
-
-
-
-<!--BLog Post--> 
-<div class="latest-products ">
-  <div class="container">
-    <div class="row bg-light p-3">
-      <div class="col-md-12">
-        <div class="section-heading">
-          <h2>Latest Blog Posts</h2>
-          <a href="">view all posts <i class="fa fa-angle-right"></i></a>
-        </div>
-      </div>
-
-      {% for article in blogs %}
-      <div class="col-md-4">
-        <div class="product-item  bg-white">
-          <a href="{{ article.get_absolute_url }}"><img src="{{ article.image.url }}" style="width: 100%; height: 270px; object-fit: cover;"  alt="{{article.image_alt}}"></a>
-          <div class="down-content">
-            <a href="{{ article.get_absolute_url }}"><h2 style="font-size: 18px; color: black;">{{article.title}}</h2></a><br>
-
-            <ul class="stars mt-2">
-              
-              <li>
-                <span class="ml-3 ">
-                    <button class="btn btn-sm" style="background-color: #f33f3f; color: white;">
-                        <a class="btn btn-sm" href="{{ article.get_absolute_url }}" style="color: white; text-decoration: none;">Read More</a>
-                    </button>
-                </span>
-              </li>
-            
-            </ul>  
-          </div>
-        </div>
-      </div>
-      {% endfor %}
-    </div>
-  </div>
-</div>
-<br>
-
-
 <!--Men Gift ideas-->
 <div class="latest-products">
   <div class="container">
@@ -336,6 +247,105 @@
   </div>
  
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--Blog Post--> 
+<div class="latest-products ">
+  <div class="container">
+    <div class="row bg-light p-3">
+      <div class="col-md-12">
+        <div class="section-heading">
+          <h2>Latest Blog Posts</h2>
+          <a href="">view all posts <i class="fa fa-angle-right"></i></a>
+        </div>
+      </div>
+
+      {% for article in blogs %}
+      <div class="col-md-4">
+        <div class="product-item  bg-white">
+          <a href="{{ article.get_absolute_url }}"><img src="{{ article.image.url }}" style="width: 100%; height: 270px; object-fit: cover;"  alt="{{article.image_alt}}"></a>
+          <div class="down-content">
+            <a href="{{ article.get_absolute_url }}"><h2 style="font-size: 18px; color: black;">{{article.title}}</h2></a><br>
+
+            <ul class="stars mt-2">
+              
+              <li>
+                <span class="ml-3 ">
+                    <button class="btn btn-sm" style="background-color: #f33f3f; color: white;">
+                        <a class="btn btn-sm" href="{{ article.get_absolute_url }}" style="color: white; text-decoration: none;">Read More</a>
+                    </button>
+                </span>
+              </li>
+            
+            </ul>  
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+<br>
+
+
+
+
+
+
+<div class="best-features ">
+  <div class="container">
+    <div class="row p-3" style="background-color: white;">
+      <div class="col-md-12">
+        <div class="section-heading">
+          <h2>About SparkEssenceGifts</h2>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="left-content">
+          <h4>Looking for the best gift ideas?</h4>
+          
+          <ul class="featured-list">
+            <li>SparkEssenceGifts is your magical portal to the world of imaginative and thoughtful presents!
+              Discover the best gift ideas for your mother, grandmother, sibling, boyfriend, girlfriend, 
+              husband, and more.</li>
+            <li>Our assortment is a captivating blend of uniqueness and allure,
+                presenting personalized marvels and thoughtfully selected surprises that elevate any occasion into a
+                cherished memory.
+                  The collection is meticulously curated,
+                  bringing you exceptional and popular gift ideas from various categories,
+                    guaranteeing a touch of individuality to every present.</li>
+
+                <li>SparkEssenceGifts brings a fun spirit to the art of gifting, guaranteeing joy,
+                laughter, and endless surprises. Join us in celebrating moments, 
+                because at SparkEssenceGifts, each present is an adventure ready to unfold! 🎁✨</li>
+
+          </ul>
+          
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="right-image">
+          <img src="https://images.pexels.com/photos/1666069/pexels-photo-1666069.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="About picture">
+        </div>
+      </div>
+    </div>
+   
+  </div>
+</div><br>
+
+
 
 
 
